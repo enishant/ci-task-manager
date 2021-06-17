@@ -80,4 +80,29 @@ class Crud extends CI_Model {
 		}
 		return $data;
 	}
+
+	public function get_by_id( $table = '', $id = '', $id_for = '', $select = '*' ) {
+		if ( ! empty( $table ) && ! empty( $id ) && ! empty( $id_for ) ) {
+			$this->db->select( $select );
+			$this->db->where( $id_for, $id );
+			$query = $this->db->get( $table );
+			if ( $query->num_rows() > 0 ) {
+				return array(
+					'status' => 'success',
+					'message' => 'Data retrieved successfully',
+					'data' => $query->row(),
+				);
+			} else {
+				return array(
+					'status' => 'error',
+					'message' => 'Data not found',
+				);
+			}
+		} else {
+			return array(
+				'status' => 'error',
+				'message' => 'Incomplete data',
+			);
+		}
+	}
 }
