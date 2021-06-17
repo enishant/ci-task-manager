@@ -105,4 +105,27 @@ class Crud extends CI_Model {
 			);
 		}
 	}
+
+	public function update( $table = '', $id = '', $id_for = '', $data = array() ) {
+		if ( ! empty( $table ) && ! empty( $id ) && ! empty( $id_for ) && ! empty( $data ) ) {
+			$this->db->where( $id_for, $id );
+			$this->db->update( $table, $data );
+			if ( $this->db->affected_rows() > 0 ) {
+				return array(
+					'status' => 'success',
+					'message' => 'Data updated successfully',
+				);
+			} else {
+				return array(
+					'status' => 'success',
+					'message' => 'No changes at existing data',
+				);
+			}
+		} else {
+			return array(
+				'status' => 'error',
+				'message' => 'Incomplete data',
+			);
+		}
+	}
 }
