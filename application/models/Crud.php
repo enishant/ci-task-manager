@@ -35,4 +35,49 @@ class Crud extends CI_Model {
 			);
 		}
 	}
+
+	public function get( $table = '', $select = '*', $offset = 0, $limit = 10, $where = array(), $where_condition = 'OR', $count = false, $debug = false ) {
+		if ( empty( $table ) ) {
+			$data['total_rows'] = 0;
+			$data['data'] = array();
+			return $data;
+		}
+		if ( ! empty( $where ) ) {
+			$where_count = 0;
+			foreach ( $where as $k => $w ) {
+				if ( $where_count == 0 ) {
+					$this->db->where( $k, $w );
+				} elseif ( $where_count > 0 && $where_condition == 'OR' ) {
+					$this->db->or_where( $k, $w );
+				} else {
+					$this->db->where( $k, $w );
+				}
+				$where_count++;
+			}
+		}
+		if ( $count ) {
+			$count_query = $this->db->get( $table );
+			$data['total_rows'] = $count_query->num_rows();
+			if ( $debug ) {
+				$data['debug']['count_query'] = $this->db->last_query();
+			}
+			return $data;
+		}
+		$this->db->select( $select );
+		$this->db->order_by( 'created_at', 'DESC' );
+		if ( $limit == -1 ) {
+			$query = $this->db->get( $table );
+		} else {
+			$query = $this->db->get( $table, $limit, $offset );
+		}
+		if ( $query->num_rows() > 0 ) {
+			$data['data'] = $query->result_array();
+		} else {
+			$data['data'] = array();
+		}
+		if ( $debug ) {
+			$data['debug']['result_query'] = $this->db->last_query();
+		}
+		return $data;
+	}
 }
