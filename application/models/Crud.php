@@ -128,4 +128,26 @@ class Crud extends CI_Model {
 			);
 		}
 	}
+
+	public function delete( $table = '', $id = '', $id_for = '' ) {
+		if ( ! empty( $table ) && ! empty( $id ) && ! empty( $id_for ) ) {
+			$this->db->delete( $table, array( $id_for => $id ) );
+			if ( $this->db->affected_rows() > 0 ) {
+				return array(
+					'status' => 'success',
+					'message' => 'Data deleted successfully',
+				);
+			} else {
+				return array(
+					'status' => 'success',
+					'message' => 'No changes at existing data',
+				);
+			}
+		} else {
+			return array(
+				'status' => 'error',
+				'message' => 'Incomplete data',
+			);
+		}
+	}
 }
