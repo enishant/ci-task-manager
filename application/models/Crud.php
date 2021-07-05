@@ -64,7 +64,7 @@ class Crud extends CI_Model {
 			return $data;
 		}
 		$this->db->select( $select );
-		$this->db->order_by( 'created_at', 'DESC' );
+		$this->db->order_by( 'ID', 'DESC' );
 		if ( $limit == -1 ) {
 			$query = $this->db->get( $table );
 		} else {
