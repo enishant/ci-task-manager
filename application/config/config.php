@@ -525,3 +525,64 @@ $config['rewrite_short_tags'] = FALSE;
 | Array:		array('10.0.1.200', '192.168.5.0/24')
 */
 $config['proxy_ips'] = '';
+
+$config['app_view_config'] = array();
+$config['app_view_config']['app_title'] = 'Task Manager';
+$config['app_view_config']['footer_copyright'] = $config['app_view_config']['app_title'];
+$config['app_view_config']['app_version'] = '1.0';
+$config['app_view_config']['footer_copyright_year'] = date('Y');
+$config['app_view_config']['css_scheme'] = 'teal';
+$config['app_view_config']['appearance'] = 'light';
+$config['app_view_config']['page_title'] = ' ';
+
+/* Navigation Menu */
+$config['app_view_config']['nav_menu'] = array(
+  array(
+    'title' => 'Dashboard',
+    'link' => $config['base_url'] . '/dashboard',
+    'baselink' => $config['base_url'] .  '/index.php/dashboard',
+    'is_current_page' => false,
+    'role' => array('manager','employee')
+  ),
+  array(
+    'title' => 'Tasks',
+    'link' => $config['base_url'] . '/dashboard/tasks',
+    'baselink' => $config['base_url'] .  '/index.php/dashboard/tasks',
+    'is_current_page' => false,
+    'role' => array('manager','employee')
+  ),
+  array(
+    'title' => 'Users',
+    'link' => $config['base_url'] . '/dashboard/users',
+    'baselink' => $config['base_url'] .  '/index.php/dashboard/users',
+    'is_current_page' => false,
+    'role' => array('manager')
+  ),
+  array(
+    'title' => 'Logout',
+    'link' => $config['base_url'] . '/logout',
+    'baselink' => $config['base_url'] .  '/index.php/logout',
+    'is_current_page' => false,
+    'role' => array('manager','employee')
+  ),
+);
+
+/* Pagination */
+$config['app_view_config']['pagination_config']['base_url'] = ''; // pagination url
+$config['app_view_config']['pagination_config']['total_rows'] = 0;
+$config['app_view_config']['pagination_config']['per_page'] = 10;
+$config['app_view_config']['pagination_config']['full_tag_open'] = "<ul class='pagination pg-blue'>";
+$config['app_view_config']['pagination_config']['full_tag_close'] ="</ul>";
+$config['app_view_config']['pagination_config']['num_tag_open'] = '<li class="page-item">';
+$config['app_view_config']['pagination_config']['num_tag_close'] = '</li>';
+$config['app_view_config']['pagination_config']['cur_tag_open'] = "<li class='disabled'><li class='active'><a href='#' class='page-link'>";
+$config['app_view_config']['pagination_config']['cur_tag_close'] = "<span class='sr-only'></span></a></li>";
+$config['app_view_config']['pagination_config']['next_tag_open'] = '<li class="page-item">';
+$config['app_view_config']['pagination_config']['next_tagl_close'] = "</li>";
+$config['app_view_config']['pagination_config']['prev_tag_open'] = '<li class="page-item">';
+$config['app_view_config']['pagination_config']['prev_tagl_close'] = "</li>";
+$config['app_view_config']['pagination_config']['first_tag_open'] = '<li class="page-item">';
+$config['app_view_config']['pagination_config']['first_tagl_close'] = "</li>";
+$config['app_view_config']['pagination_config']['last_tag_open'] = '<li class="page-item">';
+$config['app_view_config']['pagination_config']['last_tagl_close'] = "</li>";
+$config['app_view_config']['pagination_config']['attributes'] = array('class' => 'page-link');
