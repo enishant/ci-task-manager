@@ -55,3 +55,12 @@ if ( ! function_exists( 'get_users_by_role' ) ) {
 		return $users;
 	}
 }
+
+if ( ! function_exists( 'get_user_by_id' ) ) {
+	function get_user_by_id( $user_id = '' ) {
+		$CI =& get_instance();
+		$select = 'ID,username,user_role,full_name';
+		$response = $CI->crud->get_by_id( 'users', $user_id, 'ID', $select );
+		return $response;
+	}
+}
