@@ -64,5 +64,18 @@ class Welcome extends CI_Controller {
 		exit();
 	}
 
+
+	public function four_o_four() {
+		$result = logged_in_user_status();
+		if ( $result['status'] == 'success' ) {
+			$this->app_view_config['page_title'] = 'Error 404 - Page not found !';
+			$this->app_view_config['user_role'] = '';
+			$this->load->view( 'app_header', $this->app_view_config );
+			$this->load->view( 'app_404', $this->app_view_config );
+			$this->load->view( 'app_footer', $this->app_view_config );
+		} else {
+			redirect( base_url( '/login' ) );
+			exit();
+		}
 	}
 }
