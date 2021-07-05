@@ -1,0 +1,25 @@
+body.login-page {
+	background: center url('../images/bg-1.jpeg');
+}
+
+#body-fixed-top {
+    margin-top: 170px;
+}
+
+#login_response {
+	width:310px;
+	margin: 0 auto;
+}
+
+.login_form {
+	width:310px;
+	margin: 0 auto;
+	background:#fff;
+}
+
+.login-page-heading {
+	font-family: 'Montserrat', cursive;
+	font-weight:100;
+	font-size: 2rem;
+	text-shadow: 4px 4px 4px #aaa;
+}
