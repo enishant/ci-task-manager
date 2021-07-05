@@ -46,5 +46,16 @@ class Welcome extends CI_Controller {
 		}
 	}
 
+	public function login() {
+		$result = logged_in_user_status();
+		if ( $result['status'] == 'success' ) {
+			redirect( base_url( 'dashboard' ) );
+			exit();
+		}
+		$this->app_view_config['page_title'] = $this->app_view_config['app_title'];
+		$this->load->view( 'login_header', $this->app_view_config );
+		$this->load->view( 'login_page', $this->app_view_config );
+		$this->load->view( 'login_footer', $this->app_view_config );
+	}
 	}
 }
