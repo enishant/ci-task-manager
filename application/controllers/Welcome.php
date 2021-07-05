@@ -57,5 +57,12 @@ class Welcome extends CI_Controller {
 		$this->load->view( 'login_page', $this->app_view_config );
 		$this->load->view( 'login_footer', $this->app_view_config );
 	}
+
+	public function logout() {
+		log_out_user();
+		redirect( base_url() );
+		exit();
+	}
+
 	}
 }
