@@ -3,6 +3,23 @@ defined( 'BASEPATH' ) or exit( 'No direct script access allowed' );
 
 class Welcome extends CI_Controller {
 
+	public function __construct() {
+		parent::__construct();
+		$this->app_view_config = $this->config->item( 'app_view_config' );
+		$this->session_expiry = $this->config->item( 'csrf_expire' );
+		$this->last_activity = $this->session->user_last_activity;
+		if ( isset( $this->last_activity ) && ( time() - $this->last_activity > $this->session_expiry ) ) {
+			$this->session->sess_destroy();
+		}
+		$this->session->user_last_activity = time();
+
+		if ( $this->app_view_config['appearance'] == 'dark' ) {
+			$this->app_view_config['site_settings']['appearance'] = 'white-text';
+		} elseif ( $this->app_view_config['appearance'] == 'light' ) {
+			$this->app_view_config['site_settings']['appearance'] = 'black-text';
+		}
+	}
+
 	/**
 	 * Index Page for this controller.
 	 *
